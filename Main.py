@@ -85,10 +85,13 @@ def alg_Straight(list_m, list_f):
     #Using method from library to sort All_Scores from highest to lowest
     All_Scores.sort(reverse=True)
 
+    #I need to find a way to identify the index of every girl when rearranging the dam All_scores
+    #Solution: Every client will have the match rate at the end of their array, that way they are
+    # arranged based on the value of their index.
+
     print_Res(male)
 
 
-    #I need to find a way to identify the index of every girl when rearranging the dam All_scores
 
 
 
