@@ -51,8 +51,6 @@ def alg_Straight(list_m, list_f):
     PF_pts = Preg_Fund/16
     PE_pts = Preg_Esp/7
 
-    All_Scores = []
-
     match_score = 0.0
 
     value_m = 0
@@ -89,13 +87,10 @@ def alg_Straight(list_m, list_f):
             female[41] = match_score
 
             #Adding for each female their match score towards the list.
-            #RESOLVE ISSUE: how is it possible to organize an array of lists, from highest to lowest, based on a specific index that is the same for every other list ?
-            All_Scores.append(female)
 
-
-        #Print results for each male, by using method from library to sort All_Scores from highest to lowest
-        All_Scores.sort(reverse=True)
-
+        index_to_sort = 41
+        # RESOLVE ISSUE: how is it possible to organize an array of lists, from highest to lowest, based on a specific index that is the same for every other list ?
+        All_Scores = sorted(list_f, key=lambda x: x[index_to_sort], reverse=True)
 
         print_Res(male)
         #First printing the top 3 scores, considering their careers
@@ -120,8 +115,9 @@ def alg_Straight(list_m, list_f):
                     if (male[7] == c[8]) or (male[7] == c[9]):
                         count2 += 1
 
-        #Resets match for new partners
+        #Resets
         female[41] = 0
+        All_Scores = []
 
 
 
@@ -137,11 +133,6 @@ def alg_Straight(list_m, list_f):
 
 
 
-
-
-
-
-        #From index 9 (question 10) and onwards, its preg fund with values
 
 
 
