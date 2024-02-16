@@ -1,6 +1,7 @@
 import openpyxl
 
 total_rows = int(input("What is the last row of the excel spreadsheet?: "))
+total_col = 43
 
 #Importing Excel spreadsheet
 
@@ -9,28 +10,27 @@ workbook = openpyxl.load_workbook('Campus_SV.xlsx')
 # Select the worksheet you want to work with
 worksheet = workbook['Form Responses 1']
 
-#For Loop for creating an array for every client and assigning its values from excel
-
-total_quest = 40
-
-#Note: Need to organize based on how important you want your rel status to be
-
-#cell_value = worksheet.cell(row=row_number, column=column_number).value
-
 #Main List of all array clients
 main_List = []
 object = []
 
+#For Loop for creating an array for every client and assigning its values from excel
+
+#cell_value = worksheet.cell(row=row_number, column=column_number).value
+
 for row in range(2, total_rows + 1):
-    for colm in range(3, total_quest + 1):
+    for colm in range(3, total_col + 1):
         client_ans = worksheet.cell(row, colm).value
         object.append(client_ans)
     main_List.append(object)
     #Resets
     object = []
 
+#Note: Need to organize based on how important you want your rel status to be
 
+print(main_List[1])
 
+x = int(input("Stopper"))
 
 
 
