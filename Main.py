@@ -3,81 +3,35 @@
 total_clients = int(input("What are the total number of clients?: "))
 
 
-#Creating Object
-
-class Client:
-    def __init__(self, name, social, number, sex, at_sex, rel, rel_s, prof, prof_s, no_prof1, no_prof2, q8, q8_s, q9,
-                 q9_s, q10, q10_s, q11, q11_s, q12, q12_s, q13, q13_s, q14, q14_s, q15, q15_s, q16, q16_s, q17, q17_s, q18, q18_s,
-                 q19, q19_s, q20, q21, q22, q23, q24, q25, q26):
-        #Note: You dont need to create any getters in python, you get them directly by the name of the object
-
-        #Preguntas Informativas
-        self.name = name
-        self.social = social
-        self.number = number
-        self.sex = sex
-        self.at_sex = at_sex
-
-        #Preguntas Fundamentales
-        self.rel = rel  # 6
-        self.rel_s = rel_s
-        self.prof = prof
-        self.prof_s = prof_s
-
-        self.no_prof1 = no_prof1 #10
-        self.no_prof2 = no_prof2 #11
-
-        self.q8 = q8
-        self.q8_s = q8_s
-        self.q9 = q9
-        self.q9_s = q9_s
-        self.q10 = q10
-        self.q10_s = q10_s
-        self.q11 = q11
-        self.q11_s = q11_s
-        self.q12 = q12
-        self.q12_s = q12_s
-        self.q13 = q13
-        self.q13_s = q13_s
-        self.q14 = q14
-        self.q14_s = q14_s
-        self.q15 = q15
-        self.q15_s = q15_s
-        self.q16 = q16
-        self.q16_s = q16_s
-        self.q17 = q17
-        self.q17_s = q17_s
-        self.q18 = q18
-        self.q18_s = q18_s
-        self.q19 = q19
-        self.q19_s = q19_s
-
-        #Preguntas Especificas
-        self.q20 = q20
-        self.q21 = q21
-        self.q22 = q22
-        self.q23 = q23
-        self.q24 = q24
-        self.q25 = q25
-        self.q26 = q26
+#For Loop for creating an array for every client and assigning its values from excel
 
 
 
 
-#Main List
+#Main List of all array clients
 
 main_List = []
 
 #For-Loop to create all objects and add them to the main list
 
 #All Lists
-gay_list = []
 
-lesb_list = []
+gay_list = [] #Add bisexual males
 
-straight_ser_list = [[],[]]
+lesb_list = [] #Add bisexual females
 
-straight_cas_list = [[],[]]
+straight_cas_list_m = []
+straight_cas_list_f = [] #Adding bisexual females
+
+#Theory: casual relationships dont care about political standpoint
+#For this, i'm not going to include it in the algorithm and see how it goes
+# (its a trial test run)
+
+#Side-Note: there's an abundance of straigh_cas_males, so no need to add bi males in the list
+
+straight_ser_list_m = []
+straight_ser_list_f = []
+
 
 #For-Loop to add all the objects to every list
 
@@ -85,15 +39,161 @@ straight_cas_list = [[],[]]
 Preg_Fund = int(input("Give me the percentage the Preguntas_Fundamentales are going to take in the algorithm: "))
 Preg_Esp = 100 - Preg_Fund
 
-#
+
+def print_Res(client):
+    print("")
+    print("Client ", client[0], ", ", client[3],"4",client[4], ". WhatsApp: ", client[2])
+    print("Results: ")
+
+def print_Partner(client, partner):
+    #This solves for the same-sex lists
+    if(client != partner):
+        print("Partner: ", partner[0], " Social: ", partner[2], " Match Rate: ", partner[41], "% ")
 
 
-def alg_Straight(array):
+# I need to find a way to identify the index of every girl when rearranging the dam All_scores
+        # Solution: Every client will have the match rate at the end of their array, that way they are
+        # arranged based on the value of their index.
+
+def alg_Straight(list_m, list_f):
 
     PF_pts = Preg_Fund/16
     PE_pts = Preg_Esp/7
 
-    All_Scores = []
+    match_score = 0.0
+
+    value_m = 0
+    value_f = 0
+
+    #First iterate every client of every list
+    for male in list_m:
+        for female in list_f:
+            #index from 10 to 33 - Preguntas Fundamentales
+            for index in range(10, 34, 2):
+                value_m = male[index] * male[index+1]
+                value_f = female[index] * female[index+1]
+                #Checks if theres a match or not on that question/filter and adds points if there is
+                if(value_m < 0) and (value_f < 0):
+                    match_score += PF_pts
+                elif(value_m == 0) and (value_f == 0):
+                    match_score += PF_pts
+                elif(value_m > 0) and (value_f > 0):
+                    match_score += PF_pts
+
+                    #Reset values to use them again
+                    value_m = 0
+                    value_f = 0
+            #index from 34 to 39 - Preguntas Especificas (-Gatos/Perros)
+            for index in range(34, 40):
+                if (male[index] < 0) and (female[index] < 0):
+                    match_score += PE_pts
+                elif (male[index] == 0) and (female[index] == 0):
+                    match_score += PE_pts
+                elif (male[index] > 0) and (female[index] > 0):
+                    match_score += PE_pts
+            # index for last question - Had bad scale for cats vs dogs
+            if(male[40] == 2) and (female[40] == 2):
+                match_score += PE_pts
+            elif(male[40] == -1) and (female[40] == -1):
+                match_score += PE_pts
+            elif(male[40] == -2) and (female[40] == -2):
+                match_score += PE_pts
+            elif (male[40] == 1) or (female[40] == 1):
+                match_score += PE_pts
+
+            # Index 41 = added space for match rate
+            female[41] = match_score
+
+        #Organizing an array of lists, from highest to lowest,
+        #based on a specific index that is the same for every other list
+
+        index_to_sort = 41
+
+        All_Scores = sorted(list_f, key=lambda x: x[index_to_sort], reverse=True)
+
+        print_Res(male)
+        # index 7 is your career
+        # index 8 and 9 are the eliminated careers
+
+        count3 = 0
+        count2 = 0
+
+        #First printing the top 3 scores, considering their careers to eliminate
+        print("Best matches:")
+        for w in All_Scores:
+            for index in range(len(All_Scores)):
+                if(male[8] != w[7]) or (male[9] != w[7]):
+                    print_Partner(male, w)
+                    count3 += 1
+                if(count3 == 3):
+                    break
+        #Second, printing the top 2 scores, getting the excluded careers
+        print("Matches that you made, but you excluded them for career type")
+        for w in All_Scores:
+            for index in range(len(All_Scores)):
+                if (male[7] == w[8]) or (male[7] == w[9]):
+                    print_Partner(male, w)
+                    count2 += 1
+                if(count2 == 2):
+                    break
+
+        #Resets
+        female[41] = 0
+        All_Scores = []
+
+
+print("List of serious-straight couples")
+print("---------------------------------")
+#Using Algorithm for serious-straight couples
+print("List for men: ")
+alg_Straight(straight_ser_list_m, straight_ser_list_f)
+print("List for women: ")
+alg_Straight(straight_ser_list_f, straight_ser_list_m)
+
+print("List of casual-straight couples")
+print("---------------------------------")
+#Algorithm for casual-straight couples
+print("List for men: ")
+alg_Straight(straight_cas_list_m, straight_cas_list_f)
+print("List for women: ")
+alg_Straight(straight_cas_list_f, straight_cas_list_m)
+
+print("List for gays")
+print("---------------------------------")
+#Algorithm for gays
+#From lack of this number, i have decided to have both casual and serious together for the LG community
+alg_Straight(gay_list, gay_list)
+
+print("List for lesbians")
+print("---------------------------------")
+#Algorithm for lesb
+alg_Straight(lesb_list, lesb_list)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

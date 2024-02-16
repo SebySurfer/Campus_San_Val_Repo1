@@ -12,7 +12,7 @@ cell_coordinate = 'B2'
 cell_value = worksheet[cell_coordinate].value
 
 # Print the value
-print("Value of cell", cell_coordinate, ":", cell_value)
+print("Value of cell ", cell_coordinate, ":", cell_value)
 
 
 x = worksheet['D7'].value
