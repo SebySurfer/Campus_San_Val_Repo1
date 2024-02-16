@@ -32,10 +32,10 @@ for row in range(2, total_rows + 1):
     #Resets
     object = []
 
-print(main_List[1])
-print(len(main_List[1]))
-
-x = int(input("Stopper"))
+#Test
+#print(main_List[1])
+#print(len(main_List[1]))
+#x = int(input("Stopper"))
 
 #For Loop for assigning all clients to their list
 #Note: Need to organize based on how important you want your rel status to be
