@@ -3,7 +3,7 @@
 total_clients = int(input("What are the total number of clients?: "))
 
 
-#For Loop for creating an array for every client and assigning its values
+#For Loop for creating an array for every client and assigning its values from excel
 
 
 
@@ -15,15 +15,24 @@ main_List = []
 #For-Loop to create all objects and add them to the main list
 
 #All Lists
-gay_list = []
 
-lesb_list = []
+gay_cas_list = [] #Add bisexual males
+gay_ser_list = [] #Add bisexual males
+
+lesb_cas_list = [] #Add bisexual females
+lesb_ser_list = [] #Add bisexual females
+
+
+straight_cas_list_m = []
+straight_cas_list_f = [] #Adding bisexual females
 
 straight_ser_list_m = []
 straight_ser_list_f = []
 
-straight_cas_list_m = []
-straight_cas_list_f = []
+#Theory: casual relationships dont care about political standpoint
+#For this, i'm not going to include it in the algorithm and see how it goes
+# (its a trial test run)
+
 
 
 #For-Loop to add all the objects to every list
@@ -119,7 +128,18 @@ def alg_Straight(list_m, list_f):
         female[41] = 0
         All_Scores = []
 
+#Using Algorithm for serious-straight couples
+#
+print("List for men: ")
+alg_Straight(straight_ser_list_m, straight_ser_list_f)
+print("List for women: ")
+alg_Straight(straight_ser_list_f, straight_ser_list_m)
 
+#Algorithm for casual-straight couples
+print("List for men: ")
+alg_Straight(straight_cas_list_m, straight_cas_list_f)
+print("List for women: ")
+alg_Straight(straight_cas_list_f, straight_cas_list_m)
 
 
 
