@@ -151,8 +151,13 @@ def alg_Straight(list_m, list_f):
                 match_score += PE_pts
             elif(male[40] == -2) and (female[40] == -2):
                 match_score += PE_pts
-            elif (male[40] == 1) or (female[40] == 1):
+            elif (male[40] == 1) and (female[40] == 1):
                 match_score += PE_pts
+            elif(male[40] == 0) and (female[40] == -2) or (male[40] == 0) and (female[40] == -1):
+                match_score += PE_pts
+            elif (male[40] == -2) and (female[40] == 0) or (male[40] == -1) and (female[40] == 0):
+                match_score += PE_pts
+
 
             # Index 41 = added space for match rate
             female[41] = match_score
