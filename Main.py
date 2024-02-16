@@ -63,24 +63,24 @@ for client in main_List:
     #LGBTQ+:
     if(client[3] == 'M') and (client[4] == 'M'): #Gays
         gay_list.append(client)
-    elif(client[3] == 'F') and (client[3] == 'F'): #Lesbians
+    elif(client[3] == 'F') and (client[4] == 'F'): #Lesbians
         lesb_list.append(client)
 
-    elif(client[3] == 'F') and (client[3] == 'A'): #Bi Girls
+    elif(client[3] == 'F') and (client[4] == 'A'): #Bi Girls
         if(client[5] == 'DCA'): #if casual
             straight_cas_list_f.append(client)
         else:
             lesb_list.append(client) #if not, to lesb
-    elif(client[3] == 'M') and (client[3] == 'A'): #Bi guys
+    elif(client[3] == 'M') and (client[4] == 'A'): #Bi guys
         gay_list.append(client)
 
     #Straight:
-    elif(client[3] == 'F') and (client[3] == 'M'):
+    elif(client[3] == 'F') and (client[4] == 'M'):
         if (client[5] == 'DCA'):
             straight_cas_list_f.append(client)
         else:
             straight_ser_list_f.append(client)
-    elif(client[3] == 'M') and (client[3] == 'F'):
+    elif(client[3] == 'M') and (client[4] == 'F'):
         if (client[5] == 'DCA'):
             straight_cas_list_m.append(client)
         else:
@@ -100,7 +100,7 @@ def print_Res(client):
 def print_Partner(client, partner):
     #This solves for the same-sex lists
     if(client != partner):
-        print("Partner: ", partner[0], " Social: ", partner[2], " Match Rate: ", partner[41], "% ")
+        print("Partner: ", partner[0], " Social: ", partner[1], " Match Rate: ", partner[41], "% ")
 
 
 # I need to find a way to identify the index of every girl when rearranging the dam All_scores
@@ -180,21 +180,19 @@ def alg_Straight(list_m, list_f):
         #First printing the top 3 scores, considering their careers to eliminate
         print("Best matches:")
         for w in All_Scores:
-            for index in range(len(All_Scores)):
-                if(male[8] != w[7]) or (male[9] != w[7]):
-                    print_Partner(male, w)
-                    count3 += 1
-                if(count3 == 3):
-                    break
+            if(male[8] != w[7]) or (male[9] != w[7]):
+                print_Partner(male, w)
+                count3 += 1
+            if(count3 == 3):
+                break
         #Second, printing the top 2 scores, getting the excluded careers
         print("Matches that you made, but you excluded them for career type")
         for w in All_Scores:
-            for index in range(len(All_Scores)):
-                if (male[7] == w[8]) or (male[7] == w[9]):
-                    print_Partner(male, w)
-                    count2 += 1
-                if(count2 == 2):
-                    break
+            if (male[7] == w[8]) or (male[7] == w[9]):
+                print_Partner(male, w)
+                count2 += 1
+            if(count2 == 2):
+                break
 
         #Resets
         for w in All_Scores:
