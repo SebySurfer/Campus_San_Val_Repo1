@@ -37,8 +37,7 @@ print(len(main_List[1]))
 
 x = int(input("Stopper"))
 
-
-#For-Loop to create all objects and add them to the main list
+#For Loop for assigning all clients to their list
 #Note: Need to organize based on how important you want your rel status to be
 
 #All Lists
