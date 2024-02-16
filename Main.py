@@ -68,29 +68,38 @@ def alg_Straight(list_m, list_f):
     #First iterate every client of every list
     for male in list_m:
         for female in list_f:
-            #index from 10 to 40
-            for index in range(10, 41):
-                #Valores Fundamentales
-                if(index < 34):
-                    value_m = male[index] * male[index+1]
-                    value_f = female[index] * female[index+1]
-                    #Checks if theres a match or not on that question/filter and adds points if there is
-                    if(value_m < 0) and (value_f < 0):
-                        match_score += PF_pts
-                    elif(value_m == 0) and (value_f == 0):
-                        match_score += PF_pts
-                    elif(value_m > 0) and (value_f > 0):
-                        match_score += PF_pts
-                    index+= 1 #To skip the follow-up question
+            #index from 10 to 33 - Preguntas Fundamentales
+            for index in range(10, 34, 2):
+                value_m = male[index] * male[index+1]
+                value_f = female[index] * female[index+1]
+                #Checks if theres a match or not on that question/filter and adds points if there is
+                if(value_m < 0) and (value_f < 0):
+                    match_score += PF_pts
+                elif(value_m == 0) and (value_f == 0):
+                    match_score += PF_pts
+                elif(value_m > 0) and (value_f > 0):
+                    match_score += PF_pts
 
                     #Reset values to use them again
                     value_m = 0
                     value_f = 0
-
-                #Valores Especificos
-                elif(index >= 34):
-                    if(male[index] == female[index]):
-                        match_score += PE_pts
+            #index from 34 to 39 - Preguntas Especificas - Gatos/Perros
+            for index in range(34, 40):
+                if (male[index] < 0) and (female[index] < 0):
+                    match_score += PE_pts
+                elif (male[index] == 0) and (female[index] == 0):
+                    match_score += PE_pts
+                elif (male[index] > 0) and (female[index] > 0):
+                    match_score += PE_pts
+            # index for last question - Had bad scale for cats vs dogs
+            if(male[40] == 2) and (female[40] == 2):
+                match_score += PE_pts
+            elif(male[40] == -1) and (female[40] == -1):
+                match_score += PE_pts
+            elif(male[40] == -2) and (female[40] == -2):
+                match_score += PE_pts
+            elif (male[40] == 1) or (female[40] == 1):
+                match_score += PE_pts
 
             # Index 41 = added space for match rate
             female[41] = match_score
@@ -110,19 +119,22 @@ def alg_Straight(list_m, list_f):
         count2 = 0
 
         print("Best matches:")
-        for c in All_Scores:
+        for w in All_Scores:
             for index in range(len(All_Scores)):
-                if(count3 < 4) and (index < len(All_Scores)):
-                    if(male[7] != c[8]) or (male[7] != c[9]):
-                        print_Partner(c)
-                        count3+= 1
+                if(male[8] != w[7]) or (male[9] != w[7]):
+                    print_Partner(w)
+                    count3 += 1
+                if(count3 == 3):
+                    break
 
         print("Matches that you made, but you excluded them for career type")
-        for c in All_Scores:
+        for w in All_Scores:
             for index in range(len(All_Scores)):
-                if (count2 < 2) and (index < len(All_Scores)):
-                    if (male[7] == c[8]) or (male[7] == c[9]):
-                        count2 += 1
+                if (male[7] == w[8]) or (male[7] == w[9]):
+                    print_Partner(w)
+                    count2 += 1
+                if(count2 == 2):
+                    break
 
         #Resets
         female[41] = 0
