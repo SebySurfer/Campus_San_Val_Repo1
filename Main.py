@@ -22,21 +22,22 @@ for row in range(2, total_rows + 1):
     for colm in range(3, total_col + 1):
         client_ans = worksheet.cell(row, colm).value
         object.append(client_ans)
+    #Adding space for match rate
+    object.append(0.0)
     main_List.append(object)
     #Resets
     object = []
 
-#Note: Need to organize based on how important you want your rel status to be
 
 print(main_List[1])
+print(len(main_List[1]))
 
 x = int(input("Stopper"))
 
 
-
-
-
 #For-Loop to create all objects and add them to the main list
+#Note: Need to organize based on how important you want your rel status to be
+
 
 #All Lists
 
