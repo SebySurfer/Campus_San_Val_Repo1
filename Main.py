@@ -1,18 +1,44 @@
+import openpyxl
+#Theory: casual relationships dont care about political standpoint
+#For this, i'm not going to include it in the algorithm and see how it goes
+# (its a trial test run)
 
 
-total_clients = int(input("What are the total number of clients?: "))
+total_rows = int(input("What is the last row of the excel spreadsheet?: "))
+total_col = 43
 
+#Importing Excel spreadsheet
+
+# Load the Excel workbook
+workbook = openpyxl.load_workbook('Campus_SV.xlsx')
+# Select the worksheet you want to work with
+worksheet = workbook['Form Responses 1']
+
+#Main List of all array clients
+main_List = []
+object = []
 
 #For Loop for creating an array for every client and assigning its values from excel
 
+#cell_value = worksheet.cell(row=row_number, column=column_number).value
 
+for row in range(2, total_rows + 1):
+    for colm in range(3, total_col + 1):
+        client_ans = worksheet.cell(row, colm).value
+        object.append(client_ans)
+    #Adding space for match rate
+    object.append(0.0)
+    main_List.append(object)
+    #Resets
+    object = []
 
+#Test
+#print(main_List[1])
+#print(len(main_List[1]))
+#x = int(input("Stopper"))
 
-#Main List of all array clients
-
-main_List = []
-
-#For-Loop to create all objects and add them to the main list
+#For Loop for assigning all clients to their list
+#Note: Need to organize based on how important you want your rel status to be
 
 #All Lists
 
@@ -23,17 +49,43 @@ lesb_list = [] #Add bisexual females
 straight_cas_list_m = []
 straight_cas_list_f = [] #Adding bisexual females
 
-#Theory: casual relationships dont care about political standpoint
-#For this, i'm not going to include it in the algorithm and see how it goes
-# (its a trial test run)
-
 #Side-Note: there's an abundance of straigh_cas_males, so no need to add bi males in the list
-
 straight_ser_list_m = []
 straight_ser_list_f = []
 
+#index 3 is sex
+#index 4 is sex attracted to
 
-#For-Loop to add all the objects to every list
+#index 5 is type of rel
+#index 6 is the imp of that rel
+
+for client in main_List:
+    #LGBTQ+:
+    if(client[3] == 'M') and (client[4] == 'M'): #Gays
+        gay_list.append(client)
+    elif(client[3] == 'F') and (client[3] == 'F'): #Lesbians
+        lesb_list.append(client)
+
+    elif(client[3] == 'F') and (client[3] == 'A'): #Bi Girls
+        if(client[5] == 'DCA'): #if casual
+            straight_cas_list_f.append(client)
+        else:
+            lesb_list.append(client) #if not, to lesb
+    elif(client[3] == 'M') and (client[3] == 'A'): #Bi guys
+        gay_list.append(client)
+
+    #Straight:
+    elif(client[3] == 'F') and (client[3] == 'M'):
+        if (client[5] == 'DCA'):
+            straight_cas_list_f.append(client)
+        else:
+            straight_ser_list_f.append(client)
+    elif(client[3] == 'M') and (client[3] == 'F'):
+        if (client[5] == 'DCA'):
+            straight_cas_list_m.append(client)
+        else:
+            straight_ser_list_m.append(client)
+
 
 
 Preg_Fund = int(input("Give me the percentage the Preguntas_Fundamentales are going to take in the algorithm: "))
@@ -99,8 +151,13 @@ def alg_Straight(list_m, list_f):
                 match_score += PE_pts
             elif(male[40] == -2) and (female[40] == -2):
                 match_score += PE_pts
-            elif (male[40] == 1) or (female[40] == 1):
+            elif (male[40] == 1) and (female[40] == 1):
                 match_score += PE_pts
+            elif(male[40] == 0) and (female[40] == -2) or (male[40] == 0) and (female[40] == -1):
+                match_score += PE_pts
+            elif (male[40] == -2) and (female[40] == 0) or (male[40] == -1) and (female[40] == 0):
+                match_score += PE_pts
+
 
             # Index 41 = added space for match rate
             female[41] = match_score
