@@ -80,9 +80,10 @@ def alg_Straight(list_m, list_f):
                 elif(value_m > 0) and (value_f > 0):
                     match_score += PF_pts
 
-                    #Reset values to use them again
-                    value_m = 0
-                    value_f = 0
+                #Reset values to use them again
+                value_m = 0
+                value_f = 0
+
             #index from 34 to 39 - Preguntas Especificas (-Gatos/Perros)
             for index in range(34, 40):
                 if (male[index] < 0) and (female[index] < 0):
@@ -103,6 +104,7 @@ def alg_Straight(list_m, list_f):
 
             # Index 41 = added space for match rate
             female[41] = match_score
+            match_score = 0.0
 
         #Organizing an array of lists, from highest to lowest,
         #based on a specific index that is the same for every other list
@@ -138,7 +140,8 @@ def alg_Straight(list_m, list_f):
                     break
 
         #Resets
-        female[41] = 0
+        for w in All_Scores:
+            w[41] = 0
         All_Scores = []
 
 
