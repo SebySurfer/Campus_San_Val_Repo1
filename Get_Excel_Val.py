@@ -15,5 +15,9 @@ cell_value = worksheet[cell_coordinate].value
 print("Value of cell ", cell_coordinate, ":", cell_value)
 
 
-x = worksheet['D7'].value
-print("Random ass value", x)
+x = worksheet['F2'].value
+print("Random ass value", x*8)
+
+y = worksheet.cell(2, 6).value
+
+print(y*9)
