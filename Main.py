@@ -199,34 +199,51 @@ def alg_Straight(list_m, list_f):
             w[41] = 0
         All_Scores = []
 
-
-print("List of serious-straight couples")
-print("---------------------------------")
 #Using Algorithm for serious-straight couples
+print("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ")
+print("List of serious-straight couples")
+print("--------------------------------------------------------")
+print("")
+print("//////////////////////////////////////")
 print("List for men: ")
 alg_Straight(straight_ser_list_m, straight_ser_list_f)
+print("--------------------------------------------------------")
+print("")
+print("//////////////////////////////////////")
 print("List for women: ")
 alg_Straight(straight_ser_list_f, straight_ser_list_m)
+print("--------------------------------------------------------")
+print("")
 
-print("List of casual-straight couples")
-print("---------------------------------")
 #Algorithm for casual-straight couples
+print("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ")
+print("List of casual-straight couples")
+print("--------------------------------------------------------")
+print("")
+print("//////////////////////////////////////")
 print("List for men: ")
 alg_Straight(straight_cas_list_m, straight_cas_list_f)
+print("--------------------------------------------------------")
+print("")
+print("//////////////////////////////////////")
 print("List for women: ")
 alg_Straight(straight_cas_list_f, straight_cas_list_m)
+print("--------------------------------------------------------")
+print("")
 
-print("List for gays")
-print("---------------------------------")
 #Algorithm for gays
-#From lack of this number, i have decided to have both casual and serious together for the LG community
+print("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ")
+print("List for gays:")
 alg_Straight(gay_list, gay_list)
+print("--------------------------------------------------------")
+print("")
 
-print("List for lesbians")
-print("---------------------------------")
 #Algorithm for lesb
+print("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ")
+print("List for lesbians:")
 alg_Straight(lesb_list, lesb_list)
-
+print("--------------------------------------------------------")
+print("")
 
 
 
