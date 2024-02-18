@@ -186,9 +186,9 @@ def alg_Straight(list_m, list_f):
             if(count3 == 3):
                 break
         #Second, printing the top 2 scores, getting the excluded careers
-        print("Matches that you made, but you excluded them for career type")
+        print("Matches that you made, but you excluded ", male[8], " and ", male[9],", their career type:")
         for w in All_Scores:
-            if (male[7] == w[8]) or (male[7] == w[9]):
+            if (male[8] == w[7]) or (male[9] == w[7]):
                 print_Partner(male, w)
                 count2 += 1
             if(count2 == 2):
