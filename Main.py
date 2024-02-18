@@ -109,7 +109,7 @@ def print_Partner(client, partner):
 
 def alg_Straight(list_m, list_f):
 
-    PF_pts = Preg_Fund/16
+    PF_pts = Preg_Fund/12
     PE_pts = Preg_Esp/7
 
     match_score = 0.0
