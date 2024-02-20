@@ -100,7 +100,7 @@ def print_Res(client):
 def print_Partner(client, partner):
     #This solves for the same-sex lists
     if(client != partner):
-        print("Partner: ", partner[0], " Social: ", partner[1], " Match Rate: ", partner[41], "% ")
+        print("Partner: ", partner[0], " Social: ", partner[1], " Match Rate: ", round(partner[41], 2), "% ")
 
 
 # I need to find a way to identify the index of every girl when rearranging the dam All_scores
